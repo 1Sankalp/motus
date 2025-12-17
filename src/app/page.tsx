@@ -829,7 +829,7 @@ export default function Home() {
                 Book a Call
               </a>
               <a
-                href="mailto:hello@motus.app"
+                href="mailto:hello@withmotus.com"
                 className="hover:text-[var(--color-text)] transition-colors"
               >
                 Contact
