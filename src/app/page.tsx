@@ -932,8 +932,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="/downloads/Motus-1.0.0-arm64.dmg"
-                download
+                href="https://github.com/1Sankalp/motus/releases/download/v1.0.0/Motus-1.0.0-arm64.dmg"
                 className="group w-full sm:w-auto bg-[var(--color-deep)] text-white px-8 py-5 rounded-2xl font-medium hover:bg-[var(--color-deep-muted)] transition-all flex items-center justify-center gap-4 shadow-lg"
               >
                 {/* Apple Logo */}
@@ -949,8 +948,7 @@ export default function Home() {
               </a>
 
               <a
-                href="/downloads/Motus-1.0.0.exe"
-                download
+                href="https://github.com/1Sankalp/motus/releases/download/v1.0.0/Motus-1.0.0.exe"
                 className="group w-full sm:w-auto bg-[var(--color-deep)] text-white px-8 py-5 rounded-2xl font-medium hover:bg-[var(--color-deep-muted)] transition-all flex items-center justify-center gap-4 shadow-lg"
               >
                 {/* Windows Logo */}
