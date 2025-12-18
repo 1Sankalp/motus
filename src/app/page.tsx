@@ -27,6 +27,11 @@ import {
   PlayCircle,
   Stethoscope,
   BatteryLow,
+  Watch,
+  Activity,
+  LineChart,
+  Moon,
+  AlertCircle,
 } from "lucide-react";
 
 const fadeInUp = {
@@ -655,6 +660,158 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Insights Section */}
+      <section className="py-24 bg-[var(--color-deep)] text-white relative overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-serif font-semibold mb-6">
+              Insights that see patterns
+              <br />
+              <span className="text-[var(--color-accent)]">before you feel pain</span>
+            </h2>
+            <p className="text-xl text-white/60 max-w-2xl mx-auto">
+              Connect your wearables and let Motus learn your body&apos;s signals.
+              Predict pain before it happens and understand what triggers it.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Feature list */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              {[
+                {
+                  icon: Watch,
+                  title: "Wearable Integration",
+                  desc: "Sync with Apple Watch, Fitbit, Garmin, and other fitness trackers to get a complete picture of your health.",
+                },
+                {
+                  icon: Moon,
+                  title: "Sleep & Recovery Correlation",
+                  desc: "Didn't sleep well? Motus knows — and prepares preventive protocols before morning neck stiffness sets in.",
+                },
+                {
+                  icon: LineChart,
+                  title: "Pattern Recognition",
+                  desc: "Discover hidden connections between your stress levels, activity, sleep quality, and pain episodes.",
+                },
+                {
+                  icon: AlertCircle,
+                  title: "Predictive Alerts",
+                  desc: "Get notified when conditions suggest an increased risk of pain, so you can act before it strikes.",
+                },
+              ].map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex items-start gap-4 bg-white/5 rounded-2xl p-5 border border-white/10"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-[var(--color-accent)]/20 flex items-center justify-center flex-shrink-0">
+                    <feature.icon className="w-6 h-6 text-[var(--color-accent)]" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">{feature.title}</h4>
+                    <p className="text-white/50 text-sm leading-relaxed">
+                      {feature.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Right side - Visual mockup */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
+                {/* Insight card example */}
+                <div className="bg-gradient-to-br from-[var(--color-accent)]/20 to-transparent rounded-2xl p-6 mb-6 border border-[var(--color-accent)]/20">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center">
+                      <Activity className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-white/60">Pattern Detected</p>
+                      <p className="font-semibold">Sleep-Pain Correlation</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-white/70 mb-4">
+                    Your lower back pain episodes are <span className="text-[var(--color-accent)] font-semibold">73% more likely</span> after nights with less than 6 hours of sleep.
+                  </p>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Moon className="w-4 h-4 text-white/40" />
+                    <span className="text-white/40">Last night: 5h 23m</span>
+                  </div>
+                </div>
+
+                {/* Recommendation card */}
+                <div className="bg-white/10 rounded-2xl p-6 border border-white/10">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm mb-1">Proactive Recommendation</p>
+                      <p className="text-sm text-white/60">
+                        Based on your sleep data, we recommend a preventive lower back protocol this morning. Start now?
+                      </p>
+                      <button className="mt-3 bg-[var(--color-accent)] text-white text-sm px-4 py-2 rounded-full font-medium hover:bg-[var(--color-accent-hover)] transition-colors">
+                        Start Protocol
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Stats row */}
+                <div className="grid grid-cols-3 gap-4 mt-6">
+                  {[
+                    { label: "Pain-free days", value: "23", trend: "+12%" },
+                    { label: "Patterns found", value: "7", trend: "" },
+                    { label: "Risk reduced", value: "45%", trend: "" },
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center">
+                      <p className="text-2xl font-bold text-[var(--color-accent)]">{stat.value}</p>
+                      <p className="text-xs text-white/40">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+          </motion.div>
+        </div>
+      </section>
+
       {/* B2B Section */}
       <section
         id="for-teams"
@@ -694,8 +851,8 @@ export default function Home() {
               },
               {
                 icon: Building2,
-                stat: "7 days",
-                label: "average productivity loss per year",
+                stat: "5 hours",
+                label: "average productivity loss per employee per week",
               },
             ].map((item, i) => (
               <motion.div
