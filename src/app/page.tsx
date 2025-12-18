@@ -91,7 +91,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors hidden sm:flex items-center gap-1.5"
             >
-              Book a Call
+              Talk to the Founder
             </a>
             <a
               href="#download"
@@ -983,7 +983,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="hover:text-[var(--color-text)] transition-colors"
               >
-                Book a Call
+                Talk to the Founder
               </a>
               <a
                 href="mailto:hello@withmotus.com"
