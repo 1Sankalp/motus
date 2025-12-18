@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useCallback } from "react";
 import {
   Download,
   Target,
@@ -47,6 +48,16 @@ const staggerContainer = {
 };
 
 export default function Home() {
+  const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      // Update URL without hash
+      window.history.pushState(null, "", `/${sectionId}`);
+    }
+  }, []);
+
   return (
     <main className="relative">
       {/* Navigation */}
@@ -72,13 +83,15 @@ export default function Home() {
             className="flex items-center gap-4 sm:gap-6"
           >
             <a
-              href="#how-it-works"
+              href="/how-it-works"
+              onClick={(e) => scrollToSection(e, "how-it-works")}
               className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors hidden sm:block"
             >
               How it works
             </a>
             <a
-              href="#for-teams"
+              href="/for-teams"
+              onClick={(e) => scrollToSection(e, "for-teams")}
               className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors hidden sm:block"
             >
               For Teams
@@ -92,7 +105,8 @@ export default function Home() {
               Talk to the Founder
             </a>
             <a
-              href="#download"
+              href="/download"
+              onClick={(e) => scrollToSection(e, "download")}
               className="bg-[var(--color-deep)] text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-[var(--color-deep-muted)] transition-colors flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
@@ -148,7 +162,8 @@ export default function Home() {
               className="flex flex-wrap items-center gap-4"
             >
               <a
-                href="#download"
+                href="/download"
+                onClick={(e) => scrollToSection(e, "download")}
                 className="group bg-[var(--color-accent)] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[var(--color-accent-hover)] transition-all shadow-lg shadow-[var(--color-accent)]/25 flex items-center gap-3"
               >
                 <Download className="w-5 h-5" />
@@ -156,7 +171,8 @@ export default function Home() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="#how-it-works"
+                href="/how-it-works"
+                onClick={(e) => scrollToSection(e, "how-it-works")}
                 className="text-[var(--color-text)] px-6 py-4 rounded-full text-lg font-medium hover:bg-[var(--color-stone)] transition-colors flex items-center gap-2"
               >
                 See how it works
