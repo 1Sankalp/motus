@@ -35,6 +35,24 @@ REPORT_TYPES = [
     "maintenance-log",
 ]
 
+COMMIT_MESSAGES = [
+    "copy: refine hero headline on landing page",
+    "style: adjust feature section spacing",
+    "fix: mobile nav padding on homepage",
+    "chore: update framer motion easing curves",
+    "style: tweak tailwind brand color tokens",
+    "copy: update stretch protocol descriptions",
+    "fix: footer link hover states",
+    "chore: bump next.js patch in lockfile",
+    "style: improve CTA button contrast",
+    "fix: layout shift on hero image load",
+]
+
+
+def pick_commit_message(slot: int, when: dt.datetime) -> str:
+    idx = (day_seed(when.date()) + slot * 31 + when.hour) % len(COMMIT_MESSAGES)
+    return COMMIT_MESSAGES[idx]
+
 
 def run_git(command: list[str]) -> str:
     result = subprocess.run(
@@ -179,17 +197,6 @@ def append_activity_log(when: dt.datetime, report_type: str, rel_path: str) -> N
         f.write(line)
 
 
-def commit_messages(report_type: str) -> str:
-    messages = {
-        "health-snapshot": "chore: add health snapshot",
-        "dependency-fingerprint": "chore: refresh dependency fingerprint",
-        "source-stats": "chore: update source stats",
-        "repo-pulse": "chore: record repo pulse",
-        "maintenance-log": "chore: append maintenance activity log",
-    }
-    return messages.get(report_type, "chore: automated maintenance update")
-
-
 def write_and_commit(slot: int, when: dt.datetime) -> None:
     ACTIVITY_DIR.mkdir(parents=True, exist_ok=True)
     metrics = gather_metrics()
@@ -206,7 +213,7 @@ def write_and_commit(slot: int, when: dt.datetime) -> None:
         print("Nothing to commit.")
         return
 
-    run_git(["git", "commit", "-m", commit_messages(report_type)])
+    run_git(["git", "commit", "-m", pick_commit_message(slot, when)])
     run_git(["git", "push"])
     print(f"Committed and pushed {rel}")
 
